@@ -15,7 +15,7 @@ const wsListener = ip => {
         try {
             const data = JSON.parse(event.data);
             printerData[ip] = ip in printerData ?  {...printerData[ip], ...data} : data;
-            console.log(`\n\nData on printer: ${ip}\n${JSON.stringify(printerData[ip], null, 2)}`)
+            // console.log(`\n\nData on printer: ${ip}\n${JSON.stringify(printerData[ip], null, 2)}`)
         } catch (e) {
             console.error(`Error parsing of data from printer on ip: ${ip}\n\n\n${e}`);
         }
