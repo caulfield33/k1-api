@@ -12,7 +12,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'master', credentialsId: 'jenkins', url: 'git@bitbucket.org:caulfield33/k1-api.git'
+                git branch: 'main', url: 'git@github.com:caulfield33/k1-api.git'
             }
         }
 
