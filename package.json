@@ -1,0 +1,15 @@
+{
+  "name": "k1-api",
+  "version": "1.0.0",
+  "description": "Creality K1 web API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2"
+  }
+}
