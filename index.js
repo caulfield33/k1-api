@@ -6,8 +6,10 @@ const app = express();
 const server = http.createServer(app);
 const printerData = {};
 
+const buildUrl = ip => `ws://${ip}:9999/`
+
 const wsListener = ip => {
-    const ws = new WebSocket(`ws://${ip}:9999/`);
+    const ws = new WebSocket(buildUrl(ip));
 
     ws.onopen = () => console.log("Connected to printer on ip: " + ip);
 
@@ -24,7 +26,12 @@ const wsListener = ip => {
     ws.onclose = () => {
         console.log("Disconected from printer on ip: " + ip);
         delete printerData[ip];
-    };  
+    };
+
+    ws.onerror = (error) => {
+        console.error(`Error connecting to printer on ip: ${ip}`);
+        ws.close();
+    };
 }
 
 
@@ -47,13 +54,13 @@ app.get('/printer-ip/:printerIp', (req, res) => {
                 resolve(res.json(printerData[ip]));
                 return;
             }
-            reject("Cannot connect to printer on ip: " + ip)
+            console.log("No data for printer on ip: " + ip)
+            resolve(res.json({disconected: true}));
         }, 5000)
     })
 });
 
 
-
-const PORT = process.env.PORT || 3110;
+const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
