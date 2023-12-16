@@ -55,10 +55,6 @@ const wsListener = ip => {
 }
 
 
-app.get('/all-connected', (req, res) => {
-    return res.json(printerData);
-})
-
 app.get('/printer-ip/:printerIp', (req, res) => {
     const ip = req.params.printerIp;
 
